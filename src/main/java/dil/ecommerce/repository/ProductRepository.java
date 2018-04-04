@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import dil.ecommerce.entity.Product;
+import dil.ecommerce.entity.PurchaseDetails;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
@@ -16,4 +17,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	List<Product> findByProductNameLike(String name);
 
 	List<Product> findByCategory(String catogory);
+
+	@Query("UPDATE P SET P.quantity = P.quantity-?2 FROM PRODUCT P WHERE P.productId = ?1")
+	void removePruchasedProducts(int productId, int quantity);
+
+	@Query("SELECT P.quantity FROM PRODUCT P WHERE P.productId = ?1")
+	int getQuantityByProductId(int productId);
+
 }

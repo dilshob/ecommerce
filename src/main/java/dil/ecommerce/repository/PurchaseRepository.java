@@ -14,5 +14,7 @@ public interface PurchaseRepository extends JpaRepository<PurchaseDetails, Integ
 
 	@Query("Select p from PurchaseDetails p where p.purchaseDate between ?1 and ?2")
 	List<PurchaseDetails> findByDate(Date start, Date end);
+	
+	
 
 }
